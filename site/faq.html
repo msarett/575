@@ -1,0 +1,86 @@
+<title>COMP 575: FAQ</title>
+
+<center>
+    <h1><a href="index.html">COMP 575</a>: Fall 2015</a></h1>
+    <h2>Frequently Asked Questions</h2>
+</center>
+
+<h3>Where is the code for each assignment?</h3>
+<blockquote>
+    /afs/cs.unc.edu/project/courses/comp575-f15/<b>code/</b>
+    <br/>
+    Each assignment is in its own pa* directory
+    <br/>
+    <br/>
+    e.g. The first assignment is found in /afs/cs.unc.edu/project/courses/comp575-f15/code/pa0
+</blockquote>
+
+<h3>Where do I store my code for each assignment?</h3>
+<blockquote>
+    /afs/cs.unc.edu/project/courses/comp575-f15/users/<b>your-name</b>
+    <br/>
+    Each assigment should have its own pa* directory
+    <br/>
+    <br/>
+    e.g. Your first assignment should be stored in /afs/cs.unc.edu/project/courses/comp575-f15/users/<b>your-name</b>/pa0
+</blockquote>
+
+<h3>Can I use the department's computers to write/compile my code?</h3>
+<blockquote>
+    Yes.
+    <br/>
+    <pre>
+    ssh -X <b>your-name</b>@classroom.cs.unc.edu</b>
+    cd /afs/cs.unc.edu/project/courses/comp575-f15/users/<b>your-name</b>
+    </pre>
+    If you need to start on a new assignment (e.g. pa# where # is 0 or 1 or whatever), you'll need to first copy the source from code into your local dir
+    <pre>
+    cp -R ../code/pa# .
+    </pre>
+    Once you have copied it, you can just work on it in your local copy in your pa# directory
+    <br/>
+    <br/>
+    If you need an account, contact John Sopko sopko@cs.unc.edu
+</blockquote>
+
+<h3>Do I have to use the department's computers?</h3>
+<blockquote>
+    No. The only actual requirements are:
+    <ul>
+        <li>You store your final code for each assignment in /afs/cs.unc.edu/project/courses/comp575-f15/users/<b>your-name</b>/pa#</li>
+        <li>It <b>can</b> compile successfully using the department's computers (i.e. <b>I</b> can compile and run it).</li>
+    </ul>
+    Developing locally (on your laptop) is perfectly fine, and may be faster than doing all your work via ssh.
+</blockquote>
+
+<h3>How do I compile and run the assignment?</h3>
+<blockquote>
+    Assuming you're in your directory on /afs...
+    <pre>
+    > cd pa0
+    > make
+    > ./image
+    </pre>
+    You show now have created the PNG files (try 'ls *.png' to see).
+    <br/>
+    If your remote connection was created with -X (i.e. ssh -X ...) and your local terminal supports X Windows, you can try viewing the files with 'preview'
+    <pre>
+    > ../../../code/preview *.png
+    </pre>
+    If that doesn't work, you can always copy the image files to your local machine (laptop)
+    <pre>
+    # from your local machine
+    > scp <b>your-name</b>@classroom.cs.unc.edu:/afs/cs.unc.edu/project/courses/comp575-f15/users/<b>your-name</b>/pa0/*.png .
+    </pre>
+</blockquote>
+
+<h3>What if my laptop is Windows?</h3>
+<blockquote>
+    Go to software.unc.edu and download the "SSH/SFTP Secure Shell"
+</blockquote>
+
+<h3>I'm a grad student. Will I get "credit" for 575?</h3>
+<blockquote>
+    Grad students can get credit for any course numbered greater than 400, so yes.
+</blockquote>
+

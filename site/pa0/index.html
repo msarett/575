@@ -1,0 +1,60 @@
+<title>COMP 575: Fall 2015</title>
+<body bgcolor=#f3f3f3>
+
+    <center>
+        <H1><a href="../index.html">COMP 575</a>: Fall 2015</H1>
+        <H2>Programming Assignment 0</H2>
+        <H3><i>Embrace and Extend</i></H3>
+    </center>
+
+    PA0 already has a working app...
+
+    <pre>
+        > make
+        > ./image --size 100
+        > open *.png
+    </pre>
+    
+    This will generate 3 images as PNG files: <b>circle.png</b>, <b>ramp.png</b> and <b>custom.png</b>.
+    (notice that custom.png is blank right now).
+    <BR/>
+    <BR/>
+    You can specify a different <i>size</i> for the images (other than 100).
+    Notice that the images scale/respond to the size (e.g. the circle grows/shrinks to fill most of the image size).
+    This is an important aspect -- that the images in some way <i>scale</i> with the dimensions.
+
+    <H3>Assignment:</H3>
+
+    Fill in the code in <b>draw_into_bitmap.cpp</b> to create the <i>custom</i> image. I will post a page
+    with the images later for all to see, so <b>keep it clean.</b>
+
+    <pre>
+    /*
+     *  The bitmap has already been sized and allocated. This function's job is to fill in the
+     *  pixels to create the custom image. See src/image.cpp for examples.
+     */
+    void cs575_draw_into_bitmap(const GBitmap& bitmap) {
+        //
+        // Your code goes here
+        //
+    } </pre>
+
+    <UL>
+    <LI/>Keep the code concise and readable -- lesser is usually besser
+    <LI/>Consider spatial (e.g. draw_circle) and color (e.g. draw_ramp) effects
+    <LI/>Speed is not critical (this time), but don&apos;t go slow for its own sake
+    <LI/>Have your drawing scale/respond to the dimensions in some interesting way
+    <LI>Source code available in .../code/pa0/</LI>
+    <LI>Due at the start of class on August 27th</LI>
+        <UL>
+        <LI>Your code in .../users/<your_dir>/pa0/draw_into_bitmap.cpp</LI>
+        <LI>It should build with no changes needed to the provided sample code</LI>
+        <LI>Your copyright at the top of the file</LI>
+        </UL>
+    </UL>
+
+    <BR/>
+    <BR/>
+    <IMG src="circle.png" />
+    <IMG src="ramp.png" />
+</body>

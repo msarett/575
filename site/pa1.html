@@ -1,0 +1,43 @@
+<title>COMP 575: Fall 2015</title>
+<body bgcolor=#f3f3f3>
+
+    <center>
+        <H1><a href="info.html">COMP 575</a>: Fall 2015</H1>
+        <H2>Programming Assignment 1</H2>
+        <H3><i>Little Boxes</i></H3>
+    </center>
+
+    <b>Assignment:</b> implement cs575_draw_rect()
+    
+    <pre>
+   /**
+    *  Fill the rectangle with the color into the bitmap (already allocated).
+    *
+    *  The affected pixels are those whose centers are "contained" inside the rectangle:
+    *      e.g. contained == center > min_edge && center <= max_edge
+    *
+    *  Any area in the rectangle that is outside of the bounds of the bitmap is ignored.
+    *
+    *  If the color's alpha is < 1, blend it with the previous pixel values using SRC_OVER blend mode.
+    */
+    void cs575_draw_rect(const GBitmap&, const GRect&, const GColor&)
+    </pre>
+
+    The image app will exercise your draw_rect function, producing some number of images, which
+    will be compared to "expected" versions. To test locally:
+    
+    <pre>
+    > make
+    > ./image
+    > open *.png
+    </pre>
+
+    <UL>
+    <LI/>Implement your cs575_draw_rect in a separate .cpp file.
+        <UL>
+        <LI/>Do not edit the existing files.
+        </UL>
+    <LI>Code available in comp575-001-f15/code/pa1/</LI>
+    <LI>Due at the start of class on August ???th</LI>
+    </UL>
+</body>

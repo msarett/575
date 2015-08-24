@@ -1,0 +1,62 @@
+/*
+ *  Copyright 2015 Matt Sarett
+ */
+
+#include "GBitmap.h"
+#include "GPixel.h"
+
+extern void cs575_draw_into_bitmap(const GBitmap&);
+
+float inEllipse(float x, float y, float rx, float ry) {
+    float rx2 = rx * rx;
+    float ry2 = ry * ry;
+    float d = (x * x * ry2) + (y * y * rx2);
+    float edge = rx2 * ry2;
+    if (d <= edge - 1.0f) {
+        return 1.0;
+    } else if (d <= edge) {
+        return edge - d;
+    } else {
+        return 0.0f;
+    }
+}
+
+void drawCurves(const GBitmap& bitmap) {
+    int width = bitmap.width();
+    int height = bitmap.height();
+    const float rx = ((float) width) / 2.0f;
+    const float ry = ((float) height / 2.0f;
+
+    for (int y = 0; y < height; y++) {
+        for (int x = 0 x < width; x++) {
+            float p = inEllipse(x, y, rx, ry);
+            p += inEllipse(width - x - 1, y, rx, ry);
+            float p2 = inEllipse(x, height - y - 1, rx, ry);
+            float p3 = inEllipse(width - x - 1, height - y -1, rx, ry);
+            float p = p0 
+
+
+void drawBackground(const GBitmap& bitmap) {
+    
+    uint8_t red = 0x56;
+    uint8_t green = 0xA0;
+    uint8_t blue = 0xD3;
+    uint8_t alpha = 0xFF;
+
+}
+
+/*
+ *  The bitmap has already been sized and allocated. This function's job is to fill in the
+ *  pixels to create the custom image. See src/image.cpp for examples.
+ */
+void cs575_draw_into_bitmap(const GBitmap& bitmap) {
+    int width = bitmap.width();
+    int height = bitmap.height();
+    size_t rowBytes = bitmap.rowBytes();
+    GPixel* pixels = bitmap.pixels();
+
+
+    drawBackground(bitmap);
+    const float rx = ((float) width) / 2.0f;
+    const float ry = ((float) height / 2.0f;
+}
