@@ -18,9 +18,9 @@ int min(int a, int b) {
  * @param y  y-coordinate of the pixel
  * @param rx x-radius of the ellipse
  * @param ry y-radius of the ellipse
- * @return   the percentage of the pixel in the ellipse, where 1.0
- *           represents a pixel fully in the ellipse, and 0.0
- *           represents a pixel fully outside the ellipse
+ * @return   the percentage of the pixel in the ellipse, where 1.0 represents a
+ *           pixel fully in the ellipse, and 0.0 represents a pixel fully
+ *           outside the ellipse
  */
 inline float inEllipse(float x, float y, float rx, float ry) {
     // Common sub-expressions
@@ -28,15 +28,18 @@ inline float inEllipse(float x, float y, float rx, float ry) {
     const float ry2 = ry * ry;
 
     // Calculate the distance of the input pixel from the origin
-    const float d = (x * x * ry2) + (y * y * rx2);
+    // Distance of upper left
+    const float d0 = (x * x * ry2) + (y * y * rx2);
+    // Distance of lower right
+    const float d1 = ((x + 1) * (x + 1) * ry2) + ((y + 1) * (y + 1) * rx2);
 
     // Calculate the distance of the edge of the ellipse from the origin
     const float edge = rx2 * ry2;
 
-    if (d < edge - 1.0f) {
+    if (d1 < edge) {
         return 1.0f;
-    } else if (d < edge) {
-        return edge - d;
+    } else if (d0 < edge) {
+        return (edge - d0) / (d1 - d0);
     } else {
         return 0.0f;
     }
@@ -101,11 +104,12 @@ void drawOverlay(const GBitmap& bitmap) {
     const int height = bitmap.height();
     const size_t rowBytes = bitmap.rowBytes();
     GPixel* pixels = bitmap.pixels();
-    const float divisor = (float) (width / 2) * (width / 2);
+    const float divisor = (float) ((width / 2) * (width / 2) +
+            (height / 2) * (height / 2));
 
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
-            // Calculate a weight based on the distance from the edge of the image
+            // Calculate a weight based on distance from the edge of the image
             int dx = min(x, width - x - 1);
             int dy = min(y, height -  y - 1);
             float d = dx * dx + dy * dy;
@@ -116,9 +120,9 @@ void drawOverlay(const GBitmap& bitmap) {
             float oldRed = (float) GPixel_GetR(pixel);
             float oldGreen = (float) GPixel_GetG(pixel);
             float oldBlue = (float) GPixel_GetB(pixel);
-            uint8_t red = (uint8_t) w * newRed + (1.0f - w) * oldRed;
-            uint8_t green = (uint8_t) w * newGreen + (1.0f - w) * oldGreen;
-            uint8_t blue = (uint8_t) w * newBlue + (1.0f - w) * oldBlue;
+            uint8_t red = (uint8_t) (w * newRed + (1.0f - w) * oldRed);
+            uint8_t green = (uint8_t) (w * newGreen + (1.0f - w) * oldGreen);
+            uint8_t blue = (uint8_t) (w * newBlue + (1.0f - w) * oldBlue);
             pixels[x] = GPixel_PackARGB(0xFF, red, green, blue);
         }
         pixels = (GPixel*) (((uint8_t*) pixels) + rowBytes);
@@ -126,16 +130,17 @@ void drawOverlay(const GBitmap& bitmap) {
 }
 
 /*
- * Draws a few partial ellipses beneath another layer
+ * Draws four partial ellipses beneath a semi-transparent top layer
  *
  * @param bitmap the bitmap that we will draw into
  */
 void cs575_draw_into_bitmap(const GBitmap& bitmap) {
-    if (bitmap.width() <= 0 || bitmap.height() <= 0 || bitmap.rowBytes() == 0 ||
+    if (bitmap.width() <= 0 || bitmap.height() <= 0 ||
+            bitmap.rowBytes() < 4 * bitmap.width() ||
             bitmap.pixels() == NULL) {
         return;
     }
 
     drawEllipses(bitmap);
-    //drawOverlay(bitmap);
+    drawOverlay(bitmap);
 }
